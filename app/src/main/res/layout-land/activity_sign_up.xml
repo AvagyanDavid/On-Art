@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/welcome_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/welcome_picture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginEnd="47dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/welcome_picture"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toStartOf="@+id/welcome_picture"
+        app:layout_constraintTop_toTopOf="@+id/welcome_picture">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/kodchasan_bold"
+            android:text="WELCOME!"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_picture"
+            app:layout_constraintStart_toStartOf="@+id/welcome_picture"
+            app:layout_constraintTop_toTopOf="@+id/welcome_picture" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kodchasan_bold"
+            android:text="Come in and invite your friends!"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_picture"
+            app:layout_constraintStart_toStartOf="@+id/welcome_picture"
+            app:layout_constraintTop_toTopOf="@+id/welcome_picture" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sign_in_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sign_in_form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/welcome_picture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="216dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_in_form"
+        app:layout_constraintEnd_toEndOf="@+id/sign_in_form"
+
+        app:layout_constraintStart_toStartOf="@+id/sign_in_form"
+        app:layout_constraintTop_toTopOf="@+id/sign_in_form">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/kodchasan_bold"
+            android:text="SIGN"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="453dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/kodchasan_bold"
+            android:text="UP"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="503dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/sign_in_form"
+        app:layout_constraintStart_toStartOf="@+id/sign_in_form"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <EditText
+            android:id="@+id/email_edit"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/edit_text_background"
+            android:hint="Email"
+            android:padding="10dp"
+            android:textColorHighlight="#00C794"
+            android:textColorHint="#373737"
+            app:layout_constraintEnd_toEndOf="@+id/sign_in_form"
+            app:layout_constraintStart_toStartOf="@+id/sign_in_form"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <EditText
+            android:id="@+id/password_edit"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="password"
+            android:background="@drawable/edit_text_background"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColorHighlight="#00C794"
+            android:textColorHint="#373737"
+            app:layout_constraintEnd_toEndOf="@+id/sign_in_form"
+            app:layout_constraintStart_toStartOf="@+id/sign_in_form"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <EditText
+            android:id="@+id/password2_edit"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:autofillHints="password"
+            android:background="@drawable/edit_text_background"
+            android:hint="Repeat password"
+            android:padding="10dp"
+            android:textColorHighlight="#00C794"
+            android:textColorHint="#373737"
+            app:layout_constraintEnd_toEndOf="@+id/sign_in_form"
+            app:layout_constraintStart_toStartOf="@+id/sign_in_form"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_next"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/background_tools"
+        android:src="@drawable/ic_next"
+
+        app:layout_constraintBottom_toBottomOf="@+id/sign_in_form"
+        app:layout_constraintEnd_toEndOf="@+id/sign_in_form"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/sign_in_form"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
