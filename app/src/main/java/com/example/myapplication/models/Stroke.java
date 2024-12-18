@@ -1,16 +1,14 @@
 package com.example.myapplication;
 
 import android.graphics.Path;
+import android.graphics.Point;
+
+import java.util.ArrayList;
 
 public class Stroke {
-
-
-    // color of the stroke
     public int color;
-
-    // width of the stroke
     public int strokeWidth;
-
+    public ArrayList<Point> points;
     // a Path object to
     // represent the path drawn
     public Path path;
@@ -20,5 +18,6 @@ public class Stroke {
         this.color = color;
         this.strokeWidth = strokeWidth;
         this.path = path;
+        this.points = new ArrayList<>();
     }
 }
