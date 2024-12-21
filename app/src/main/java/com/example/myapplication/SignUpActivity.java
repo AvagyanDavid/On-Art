@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +17,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText email, password, password2;
     private ImageButton btn_next;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,6 @@ public class SignUpActivity extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(password.getText().toString())) {
                     Toast toast = Toast.makeText(SignUpActivity.this, "Логин и пароль не могут быть пустыми", Toast.LENGTH_LONG);
                     toast.show();
@@ -41,10 +39,12 @@ public class SignUpActivity extends AppCompatActivity {
                 } else if (password != password2) {
                     Toast toast2 = Toast.makeText(SignUpActivity.this, "Пароли не совпадают",Toast.LENGTH_LONG);
                     toast2.show();
+                } else {
+                    Intent intent = new Intent(SignUpActivity.this, PersonalInfoActivity.class);
+                    startActivity(intent);
                 }
             }
         });
-
     }
 
     public static boolean isEmailValid(String email) {

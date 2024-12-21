@@ -1,9 +1,9 @@
 package com.example.myapplication.models;
 
-public class Point {
+public class MPoint {
     public float x, y;
 
-    public Point(float x, float y) {
+    public MPoint(float x, float y) {
         this.x = x;
         this.y = y;
     }

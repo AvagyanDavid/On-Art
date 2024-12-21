@@ -10,6 +10,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.myapplication.models.MPoint;
+import com.example.myapplication.models.Stroke;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DrawView extends View {
@@ -100,17 +106,20 @@ public class DrawView extends View {
         // to draw the background of the canvas
         canvas.save();
 
-        // DEFAULT color of the canvas
-        int backgroundColor = Color.WHITE;
-        mCanvas.drawColor(backgroundColor);
+        mCanvas.drawColor(Color.WHITE);
 
-        // now, we iterate over the list of paths
-        // and draw each path on the canvas
-        for (Stroke fp : paths) {
-            mPaint.setColor(fp.color);
-            mPaint.setStrokeWidth(fp.strokeWidth);
-            mCanvas.drawPath(fp.path, mPaint);
+        for (Stroke stroke : paths) {
+            mPaint.setColor(stroke.color);
+            mPaint.setStrokeWidth(stroke.strokeWidth);
+
+            // Отрисовка точек мазка
+            for (int i = 0; i < stroke.points.size() - 1; i++) {
+                MPoint p1 = stroke.points.get(i);
+                MPoint p2 = stroke.points.get(i + 1);
+                mCanvas.drawLine(p1.x, p1.y, p2.x, p2.y, mPaint);
+            }
         }
+
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.restore();
     }
@@ -121,20 +130,10 @@ public class DrawView extends View {
     // firstly, we create a new Stroke
     // and add it to the paths list
     private void touchStart(float x, float y) {
-        mPath = new Path();
-        Stroke fp = new Stroke(currentColor, strokeWidth, mPath);
-        paths.add(fp);
+        Stroke stroke = new Stroke(currentColor, strokeWidth);
+        stroke.points.add(new MPoint(x, y));
+        paths.add(stroke);
 
-        // finally remove any curve
-        // or line from the path
-        mPath.reset();
-
-        // this methods sets the starting
-        // point of the line being drawn
-        mPath.moveTo(x, y);
-
-        // we save the current
-        // coordinates of the finger
         mX = x;
         mY = y;
     }
@@ -152,7 +151,9 @@ public class DrawView extends View {
         float dy = Math.abs(y - mY);
 
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+            MPoint point = new MPoint(x, y);
+            Stroke currentStroke = paths.get(paths.size() - 1);
+            currentStroke.points.add(point); // Добавляем точку
             mX = x;
             mY = y;
         }
@@ -162,7 +163,15 @@ public class DrawView extends View {
     // which simply draws the line until
     // the end position
     private void touchUp() {
-        mPath.lineTo(mX, mY);
+        Stroke currentStroke = paths.get(paths.size() - 1);
+        currentStroke.points.add(new MPoint(mX, mY));
+
+        Gson gson = new Gson();
+        String jsonStroke = gson.toJson(currentStroke);
+        System.out.println(jsonStroke);
+
+
+        sendStrokeToServer(jsonStroke);
     }
 
     // the onTouchEvent() method provides us with
@@ -189,5 +198,29 @@ public class DrawView extends View {
                 break;
         }
         return true;
+    }
+
+    public String serializeStrokes() {
+        Gson gson = new Gson();
+        return gson.toJson(paths);
+    }
+
+    public void deserializeStrokes(String json) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Stroke>>() {}.getType();
+        paths = gson.fromJson(json, type);
+        invalidate(); // Перерисовать холст
+    }
+
+    private void sendStrokeToServer(String jsonStroke) {
+        // Здесь используется любая библиотека для HTTP запросов, например, OkHttp
+        new Thread(() -> {
+            try {
+                // Ваш код для отправки данных на сервер
+                // Например, OkHttpClient или HttpURLConnection
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
